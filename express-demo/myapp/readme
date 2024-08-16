@@ -1,0 +1,202 @@
+下面是针对你提到的每个知识点的 Express 示例：
+
+### 1. 解析 JSON 数据
+使用 `express.json()` 中间件来解析 JSON 格式的请求体。
+
+```javascript
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.post('/json', (req, res) => {
+  console.log(req.body);
+  res.send("Received JSON data.");
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 2. 解析 form-data
+对于 multipart/form-data（通常用于文件上传），需要使用 `multer` 这个中间件。
+
+```javascript
+const express = require('express');
+const multer = require('multer');
+const upload = multer();
+const app = express();
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  console.log(req.file);
+  res.send("File uploaded.");
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 3. 解析 x-www-form-urlencoded
+使用 `express.urlencoded()` 中间件来解析表单数据。
+
+```javascript
+const express = require('express');
+const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/form', (req, res) => {
+  console.log(req.body);
+  res.send("Form data received.");
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 4. 获取图片文件
+使用 `multer` 中间件来处理图片文件上传。
+
+```javascript
+const express = require('express');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const app = express();
+
+app.post('/upload-image', upload.single('image'), (req, res) => {
+  console.log(req.file);
+  res.send("Image uploaded.");
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 5. 获取 params 参数
+获取 URL 中的参数。
+
+```javascript
+const express = require('express');
+const app = express();
+
+app.get('/users/:userId', (req, res) => {
+  res.send(`User ID is ${req.params.userId}`);
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 6. 获取 query 参数
+获取 URL 中的查询字符串参数。
+
+```javascript
+const express = require('express');
+const app = express();
+
+app.get('/search', (req, res) => {
+  res.send(`Query: ${req.query.q}`);
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 7. 请求远程 API
+使用 `axios` 来请求远程 API。
+
+```javascript
+const express = require('express');
+const axios = require('axios');
+const app = express();
+
+app.get('/api', async (req, res) => {
+  try {
+    const response = await axios.get('https://api.example.com/data');
+    res.send(response.data);
+  } catch (error) {
+    res.status(500).send(error.toString());
+  }
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 8. 异步多 API
+同时请求多个 API 并处理响应。
+
+```javascript
+const express = require('express');
+const axios = require('axios');
+const app = express();
+
+app.get('/multiple-apis', async (req, res) => {
+  try {
+    const [apiResponse1, apiResponse2] = await Promise.all([
+      axios.get('https://api.example.com/data1'),
+      axios.get('https://api.example.com/data2')
+    ]);
+    res.send({ data1: apiResponse1.data, data2: apiResponse2.data });
+  } catch (error) {
+    res.status(500).send(error.toString());
+  }
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 9. 请求/写入数据库
+使用 `mongoose` 来连接 MongoDB 并执行基本的 CRUD 操作。
+
+```javascript
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
+
+mongoose.connect('mongodb://localhost:27017/testdb');
+
+const UserSchema = new mongoose.Schema({
+  name: String,
+  age: Number
+});
+const User = mongoose.model('User', UserSchema);
+
+app.use(express.json());
+
+app.post('/users', async (req, res) => {
+  const newUser = new User(req.body);
+  await newUser.save();
+  res.send("User created.");
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 10. 分页数据
+实现简单的分页逻辑。
+
+```javascript
+const express = require('express');
+const app = express();
+
+app.get('/items', (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const items = Array.from({ length: 100 }).map((_, index) => `Item ${index + 1}`);
+  const result = items.slice((page - 1) * limit, page * limit);
+  res.json(result);
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+### 11. 自执行的定时任务
+使用 `node-cron` 来安排定时任务。
+
+```javascript
+const express = require('express');
+const cron = require('node-cron');
+const app = express();
+
+cron.schedule('* * * * *', () => {
+  console.log('This task runs every minute.');
+});
+
+app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+```
+
+这些示例涵盖了从基本的数据处理到与外部服务的交互等多种场景，希望对你有所帮助！

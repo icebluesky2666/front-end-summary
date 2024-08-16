@@ -1,0 +1,35 @@
+# 如何实时预览
+通过 DevServer 启动的 Webpack 会开启监听模式，当发生变化时重新执行完构建后通知 DevServer。 DevServer 会让 Webpack 在构建出的 JavaScript 代码里注入一个代理客户端用于控制网页，网页和 DevServer 之间通过 WebSocket 协议通信， 以方便 DevServer 主动向客户端发送命令。 DevServer 在收到来自 Webpack 的文件变化通知时通过注入的客户端控制网页刷新。
+# 热模块替换
+主要是不刷新，--hot
+# 开启sourcemap 
+--devtool source-map
+# output.library
+output.library 配置需要与 output.libraryTarget 一起使用
+```
+ output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-library.js',
+    library: 'MyLibrary',
+    libraryTarget: 'umd' // 通用模块定义
+  }
+  ; var：输出一个变量。例如，library: 'MyLibrary' 会生成 var MyLibrary = ...。
+  ; this：将库附加到 this 上下文上。
+  ; commonjs：输出为 CommonJS 模块。
+  ; commonjs2：输出为 CommonJS2 模块。
+  ; amd：定义为 AMD 模块。
+  ; umd：输出为 UMD 模块，可以在 AMD, CommonJS 和全局变量使用。
+  ; window：在浏览器中，将库附加到 window 对象上。
+  ; global：在 Node.js 中，将库附加到 global 对象上。
+```
+# output.publicPath
+output.publicPath 配置发布到线上资源的 URL 前缀，为string 类型
+filename:'[name]_[chunkhash:8].js'
+publicPath: 'https://cdn.example.com/assets/'
+<script src='https://cdn.example.com/assets/a_12345678.js'></script>
+#mainFields
+mainFields 配置项用于指定在解析模块时，从 package.json 中哪些字段导入模块。这个配置主要用于确定当你 require 或 import 一个模块时，Webpack 应该查看哪个字段来找到模块的入口文件。
+虽然优先使用 ES 模块可能有助于提高打包效率（因为 ES 模块更容易进行树摇（tree-shaking）），但过度定制 mainFields 可能会导致解析错误或性能下降，尤其是在模块没有按预期提供正确字段的情况下。
+
+
+
