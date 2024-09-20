@@ -16,3 +16,18 @@ Person.prototype.sayHello = function() {
 };
 var p = myNew(Person, 'John', 25);
 p.sayHello(); // Hello, my name is John
+
+
+
+// 自测
+function MyNew1(ObjCons, ...args){
+  // 根据原型创建对象
+  const res = Object.create(ObjCons.prototype);
+  // 执行构造函数
+  const tmp = ObjCons.apply(res,[...args])
+  // 返回
+  return  typeof tmp === 'object' && tmp !== null ?tmp:res
+}
+
+const myNew1_1 = MyNew1(Person, 'jon', 25)
+myNew1_1.sayHello()

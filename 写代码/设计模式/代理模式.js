@@ -23,5 +23,5 @@ const proxyAdd = (() =>{
   }
 })()
 
-console.log(proxyAdd(1,2,3))
-console.log(proxyAdd(1,2,3))
+console.log(proxyAdd()(1,2,3))
+console.log(proxyAdd()(1,2,3))

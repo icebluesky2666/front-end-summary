@@ -1,0 +1,36 @@
+<style>
+
+  .son1{
+       width: 200px;
+        border-radius: 1px solid red;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+  }
+
+
+  .son2{
+      width:200px;
+      position: relative;
+      line-height: 20px;
+      height: 50px;
+      overflow: hidden;
+  }
+  .son2::after{
+    content: "...";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 20px 0 10px;
+  }
+
+
+</style>
+<p>文本溢出</p>
+<p>控制行数4行</p>
+<p class="son1">hauhduaadjaidjaoidjioajsdhauhduaadjaidjaoidjioajsdoiajsoidjoijdoijhauhduaadjaidjaoidjioajsdoiajsoidjoijdoijhauhduaadjaidjaoidjioajsdoiajsoidjoijdoijoiajsoidjoijdoij</p>
+<p>控制高度300px</p>
+<div class="son2">hauhduaadjaidjaoidjioajsdhauhduaadjaidjaoidjioajsdoiajsoidjoijdoijhauhduaadjaidjaoidjioajsdoiajsoidjoijdoijhauhduaadjaidjaoidjioajsdoiajsoidjoijdoijoiajsoidjoijdoij</div>
+

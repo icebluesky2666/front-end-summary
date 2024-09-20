@@ -1,0 +1,1 @@
+type MyParameters<T extends (props: any)=> any> = T extends (props: infer R) => any?R:never
