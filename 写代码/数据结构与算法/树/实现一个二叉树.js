@@ -73,6 +73,7 @@ tree.insertNode(14);
 tree.insertNode(4);
 tree.insertNode(7);
 tree.insertNode(13);
+tree.insertNode(15);
 console.log(tree)
 
 module.exports = tree;

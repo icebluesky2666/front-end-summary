@@ -74,18 +74,52 @@ function getWightTree(root){// Hash
   const nodeMap = new Map();
   let currentLeval = 1;
   let currentLevalNum = 0;
+  let max = 0;
   nodeMap.set(root, 1)
   while(stack.length){
     let current = stack.shift();
+    if(nodeMap.get(current) === currentLeval){
+      currentLevalNum++;
+      max= Math.max(max, currentLevalNum);
+    }else{
+      currentLeval++;
+      currentLevalNum = 1;
+    }
     if(current.left) {
       stack.push(current.left);
-      nodeMap.set(root, currentLeval + 1)
+      nodeMap.set(current.left, currentLeval + 1)
     }
     if(current.right) {
       stack.push(current.right);
-      nodeMap.set(root, currentLeval + 1)
+      nodeMap.set(current.right, currentLeval + 1)
     }
   }
+  console.log(max)
+}
+// 二叉树的反转
+function converseTree(head){
+  // 层序遍历左右节点进行交换
+  const nodes = [head];
+  while(nodes.length){
+    const current = nodes.shift();
+    let tmp = current.left;
+    current.left = current.right;
+    current.right = tmp;
+    // 插入新节点
+    if(current.left) nodes.push(current.left);
+    if(current.right) nodes.push(current.right);
+  }
+  return head;
+}
+function converseTree2(head){
+  if(!head) return;
+  // 层序遍历左右节点进行交换
+  let tmp = head.left;
+  head.left = head.right;
+  head.right = tmp;
+  converseTree2(head.left)
+  converseTree2(head.right)
+  return head;
 }
 // 测试
 console.log('先序遍历：');
@@ -102,4 +136,8 @@ console.log('后序遍历2：');
 nextOrderTraversalNoRecursion(tree.root)
 console.log('层序遍历：');
 leavlOrderTraversal(tree.root)
-
+console.log('二叉树的最大宽度：');
+getWightTree(tree.root);
+console.log('树反转：')
+// converseTree(tree.root);
+converseTree2(tree.root);
