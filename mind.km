@@ -1,0 +1,34 @@
+{
+    "root": {
+        "data": {
+            "id": "d4wwfrdju7c0",
+            "created": 1729048212895,
+            "text": "react"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "d4wwg4m67qo0",
+                    "created": 1729048241714,
+                    "text": "classCompontent"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "d4wwkx7sy8w0",
+                    "created": 1729048617429,
+                    "text": "分支主题",
+                    "layout_mind_offset": {
+                        "x": 456.9999927361812,
+                        "y": 66.99999893506379
+                    }
+                },
+                "children": []
+            }
+        ]
+    },
+    "template": "default",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

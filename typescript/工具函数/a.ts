@@ -8,3 +8,6 @@ type Animal = {
 type Bear = Animal & { 
   honey: boolean 
 }
+let a: A = {
+  number: '1'
+}

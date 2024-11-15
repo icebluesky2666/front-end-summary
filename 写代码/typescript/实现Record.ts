@@ -14,7 +14,7 @@ const reordObj: Record1  = {
   name: {
     name: '1'
   }
-} 
+}
 // 实现
 type MyRecord<K extends keyof any, T> = {
   [P in K]: T

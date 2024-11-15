@@ -1,4 +1,4 @@
-console.log(myVar); // 输出: function myVar() {}
+console.log(myVar); // 输出: [Function: myVar]
 
 var myVar = "Hello, world!";
 console.log(myVar); // 输出: "Hello, world!"

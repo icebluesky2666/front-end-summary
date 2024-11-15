@@ -1,30 +1,5 @@
-// Pick
-type MyPickTest<T, K extends keyof T> = {
-  [P in K]: T[P]
-}
-// Omit
-type MyOmitTest<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-// Partial
-type MyPartialTest<T> = {
-  [P in keyof T]?: T[P]
-}
-// Record
-type MyRecordTest<K extends keyof any, T> = {
-  [P in K]: T 
-} 
-// Exclude
-type MyExcludeTest<K, T> = K extends T? never: K
-// Extract
-type MyExtractTest<K, T> = K extends T? K: never
-// Readonly
-type MyReadonlyTest<T> = {
-  readonly [P in keyof T]: T[P]
-}
-// Required
-type MyRequiredTest <T> = {
-  [P in keyof T]-?: T[P]
-}
-// ReturnType
-type MyReturnTypeTest <T extends (props: any)=> any> = T extends (props: any) => infer R?R: never
-// Parameter
-type ParameterTypeTest <T extends (props: any) => any> = T extends (props: infer R) => any?R: never
+
+type x = ExcludeT<"name" | "age" | "userId", "name">;
+
+const v : x = "name";
+// 一般来说，ts 会解析项目中所有的 *.ts 文件，当然也包含以 .d.ts 结尾的文件。所以当我们将 jQuery.d.ts 放到项目中时，其他所有 *.ts 文件就都可以获得 jQuery 的类型定义了。

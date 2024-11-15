@@ -5,14 +5,17 @@ import Test2 from './comp/test2'
 import Test3 from './comp/test3'
 import Test4 from './comp/test4'
 import Test5 from './comp/test5'
+import Test6 from './comp/test6'
 function App() {
   return (
     <div className="App">
-      <Test1></Test1>
+
+      <Test1>1e22</Test1>
       <Test2></Test2>
       <Test3></Test3>
       <Test4></Test4>
       <Test5></Test5>
+      <Test6></Test6>
     </div>
   );
 }
