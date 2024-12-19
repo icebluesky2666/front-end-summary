@@ -7,12 +7,12 @@ class Node {
   }
 }
 const serializationTree = (head)=>{
- if(!head){
-  return '_#'
- }
- const leftStr = serializationTree(head.left);
- const rightStr = serializationTree(head.right);
- return leftStr + `_${head.data}` + rightStr;
+  if(!head){
+    return '_#'
+  }
+  const leftStr = serializationTree(head.left);
+  const rightStr = serializationTree(head.right);
+  return `_${head.data}` + leftStr + rightStr;
 }
 const serializationStr = serializationTree(tree.root);
 console.log('序列化后：', serializationStr);
@@ -20,18 +20,18 @@ console.log('序列化后：', serializationStr);
 const deserialization = (str)=>{
   const arr = str.split('_');
   arr.shift();// 因为最前面有一个空字符
-  deserializationProcess(arr);
+  console.log(arr)
+  return deserializationProcess(arr);
 }
 const deserializationProcess = (arr) => {
   const node = arr.shift();
   if(node === '#'){
     return null;
   }
-  nodeLeft = new Node(node.data);
-  nodeHead = deserializationProcess(arr);
-  nodeHead.left = nodeLeft;
-  nodeHead.right = deserializationProcess(arr);
-  return nodeHead;
+  let currentNode = new Node(node);
+  currentNode.left = deserializationProcess(arr);
+  currentNode.right = deserializationProcess(arr);
+  return currentNode;
 }
 const nodeTree = deserialization(serializationStr)
 console.log('反序列化后：', nodeTree);

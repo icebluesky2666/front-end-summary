@@ -25,6 +25,22 @@ function deleteNodeFromTree(value, tree){
     }
     parentNode = node;
   }
+  // while(node){
+  //   if(node.data === value){
+  //     delNode = node;
+  //     break;
+  //   }
+
+
+  // }
+  // function getNode(node){
+  //   if(node.data === value){
+  //     delNode = node;
+  //     return;
+  //   }
+  //   getNode(node.left);
+  //   getNode(node.right);
+  // }
   if(!delNode){
     console.log('未找到删除节点')
     return;

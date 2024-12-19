@@ -8,3 +8,5 @@ type UserExclude = Exclude<"name" | "age" | "userId", "name">;
 type MyExclude<K , T> = K extends T? never: K
 // 验证
 type UserExclude1 = MyExclude<"name" | "age" | "userId", "name">;
+
+type MyExclude1<T, K> = T extends K?never:T;

@@ -18,3 +18,17 @@ function deepClone(obj){
 const obj1 = {a:1,b:{name: '小明'}};
 const obj2 = deepClone(obj1);
 console.log(obj2)
+
+
+function deepClone1(obj){
+  if(typeof obj !== 'object'){
+    return obj;
+  }
+  const res = Array.isArray(obj)?[]:{};
+  ([] || Object.keys(obj)).forEach((key)=>{
+    if(obj.hasOwnProperty(key)){
+      res[key] = typeof obj[key] === 'object'?deepClone1(obj[key]):obj[key];
+    }
+  })
+  return res;
+}

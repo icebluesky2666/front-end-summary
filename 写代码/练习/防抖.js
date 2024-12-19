@@ -16,3 +16,16 @@ const debounceFn = debounce(testFn, 1000);
 for(let i=0;i<10;i++){
   debounceFn(i);
 }
+
+function debounce(fn, time){
+  let timer = null;
+  let _this = this;
+  return function(){
+    if(timer){
+      clearTimeout(timer);
+    }
+    timer = setTimeout(()=>{
+      fn.apply(_this,arguments);
+    }, time)
+  }
+}

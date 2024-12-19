@@ -1,10 +1,15 @@
-function useState(){
-  const [state, dispach] = useReducer((data, tmpState)=>{
-    return typeof data === 'object'?Object.assign(tmpState, data): data
+function useState(inirData){
+  const [state, dispach] = useReducer((state, action)=>{
+    if(action.type === 'init'){
+      return typeof action.data === 'object'?Object.assign(state, action.data): action.data
+    }
   }, inirData);
   
   const setState = (data)=>{
-    dispach(data, state);
+    dispach({
+      type: 'init',
+      data,
+    });
   }
   return [state, setState]
 }

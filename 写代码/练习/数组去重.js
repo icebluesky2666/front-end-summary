@@ -10,3 +10,14 @@ function getSetArray2(arr){
 const a = [1,2,2,5,5,7];
 console.log(getSetArray(a));
 console.log(getSetArray2(a));
+
+function setArray(arr){
+  // return Array.from(new Set(arr));
+  return arr.reduce((old, pre)=>{
+    if(old.includes(pre)){
+      return old;
+    }else{
+      return old.concat(pre)
+    }
+  }, [])
+}

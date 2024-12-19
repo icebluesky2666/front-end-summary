@@ -12,3 +12,13 @@ function Anmials(name){
 const cat = myNew(Anmials, '喵')
 
 console.log(cat.name)
+
+function myNew1(Fn,...args){
+  let res = Object.create(myNew);
+  const constructorObj = Fn.apply(Fn, args);
+  if(typeof constructorObj === 'object'){
+    return constructorObj;
+  }else{
+    return res;
+  }
+}

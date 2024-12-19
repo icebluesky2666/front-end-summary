@@ -36,5 +36,6 @@ let x = Promise.resolve(3).then(()=>{
   console.log('haha')
 })
 console.log(4)
+// 1 2 4 haha start end 3
 
 

@@ -31,7 +31,7 @@ function inOrderTraversalNoRecursion(root) {
       stack.push(current)
       current = current.left;
     }
-    // 输出中
+    // 输出
     current = stack.pop();
     console.log(current.data);
     // 右子树
@@ -44,6 +44,7 @@ function nextOrderTraversal(root) {
   if(root.right) nextOrderTraversal(root.right);
   console.log(root.data);
 }
+// 思路，后续便利是左右中，他的反是中左右，相当于先右在左的先顺便利，取反
 function nextOrderTraversalNoRecursion(root) {
   let stack = [root];
   let stack2 = [];
@@ -57,7 +58,7 @@ function nextOrderTraversalNoRecursion(root) {
     console.log(val.data)
   })
 }
-// 层序遍历
+// 层序遍历 利用队列实现
 function leavlOrderTraversal(root) {
   const stack = [root];
   while(stack.length){
@@ -95,6 +96,33 @@ function getWightTree(root){// Hash
     }
   }
   console.log(max)
+}
+// 二叉树的高度
+function getHeightTree(root){
+  if(root === null) return 0;
+  let stack = [root];
+  let height = 0;
+  let currentLeval = 0;
+  let nodeMap = new Map();
+  nodeMap.set(root, 1);
+  while(stack.length > 0){
+    let current = stack.shift();
+    let leval = nodeMap.get(current);
+    if(leval !== currentLeval){
+      currentLeval = leval;
+      height++;
+    }
+    if(current.left) {
+      nodeMap.set(current.left, currentLeval+1)
+      stack.push(current.left)
+    };
+    if(current.right){
+      nodeMap.set(current.right, currentLeval+1)
+      stack.push(current.right);
+    }
+  }
+  console.log(height)
+  return height;
 }
 // 二叉树的反转
 function converseTree(head){
@@ -138,6 +166,9 @@ console.log('层序遍历：');
 leavlOrderTraversal(tree.root)
 console.log('二叉树的最大宽度：');
 getWightTree(tree.root);
+console.log('二叉树的最大高度：');
+getHeightTree(tree.root);
 console.log('树反转：')
 // converseTree(tree.root);
 converseTree2(tree.root);
+

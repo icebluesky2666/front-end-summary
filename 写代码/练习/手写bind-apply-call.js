@@ -40,5 +40,13 @@ a.showValue.myApply(b)
 a.showValue.myCall(b)
 a.showValue.myBind(b)();
 
+Function.prototype.myApply = function(context, args = []){
+  const sy = Symbol('');
+  context[sy] = this;
+  const res = context[sy](...args);
+  delete context[sy];
+  return res;
+}
+
 
 

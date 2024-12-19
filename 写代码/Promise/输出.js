@@ -1,7 +1,7 @@
 const P = new Promise((resolve, reject)=>{
   resolve('resolve');
   reject('reject');
-  // throw Error('error')
+  //、throw Error('error')
   setTimeout(()=>{
     console.log(111)
   })
@@ -13,3 +13,4 @@ P.then((data)=>{
 }).catch((e)=>{
   console.log(e)
 })
+// resolve 111

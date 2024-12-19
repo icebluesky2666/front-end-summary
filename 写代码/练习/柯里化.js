@@ -18,6 +18,7 @@ function currying(fn){
     }
   }
 }
+
 //currying(add)(1)(2)(3);
 
 // 还有一种函数要求 add(1,2,3) add(1)(2)(3) add(1,2)(3)都可以
@@ -38,3 +39,33 @@ function addCurring(){
 
 console.log(addCurring(1,2,3,4).toString())
 console.log(addCurring(1,2)(3,4).toString())
+
+
+// 将add(1,2,3)改成add(1)(2)(3)
+function currying(fn){
+  const _this = this;
+  return function tmpFn(){
+    if(arguments.length > fn.length){
+      fn.apply(_this, arguments)
+    }else{
+      const argumentsOld = arguments;
+      return function(){
+        return tmpFn([...argumentsOld, ...arguments])
+      }
+    }
+  }
+}
+// 还有一种函数要求 add(1,2,3) add(1)(2)(3) add(1,2)(3)都可以
+function addCurring(){
+  const args = [];
+  const res = function(){
+    args = args.concat(arguments);
+    return res;
+  }
+  res.prototype.toString = function(){
+    return args.reduce((a, b)=>{
+      return a+b
+    },0)
+  }
+  return res;
+}

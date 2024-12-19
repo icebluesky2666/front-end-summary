@@ -47,3 +47,37 @@ new Mypromise((resolve,reject)=>{
 },(value)=>{
   console.log('错误结果：',value)
 })
+
+function Mypromise1(fn){
+  this.satus = 'panding'
+  this.res = null;
+  this.errorRes = null;
+  this.handler = [];
+  this.errHandler = [];
+
+  const resolve = function (data){
+    this.satus = 'resolve'
+    this.res = data;
+    ([] || this.handler).forEach((handler)=>{
+      handler();
+    })
+  }
+  const reject = function (errData){
+     this.satus = 'reject'
+    this.errorRes = errData;
+    ([] || this.errHandler).forEach((handler)=>{
+      handler();
+    })
+  }
+  fn(resolve, reject);
+}
+Mypromise1.prototype.then = function(res, rej){
+  if(this.satus === 'resolve'){
+    this.handler.push(res)
+  }else if(this.satus === 'reject'){
+    this.errHandler.push(rej)
+  }else{
+    this.handler.push(res)
+    this.errHandler.push(rej)
+  }
+}

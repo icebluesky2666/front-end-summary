@@ -35,3 +35,21 @@ function converseNode(head){
     return [head, tail]
   }
 }
+function converseNode(head){
+  let pre = null;
+  let current = head;
+  let next = null;
+  let head1 = null;
+  while(current){
+    next = current.next;
+    current.next = pre;
+    current.pre = next;
+    pre = current;
+    if(!next){
+      head1 = current
+      break;
+    }
+    current = next;
+  }
+  return head;
+}

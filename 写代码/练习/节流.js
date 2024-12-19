@@ -25,3 +25,14 @@ throttlFn();
 setTimeout(()=>{
   throttlFn();
 },2000)
+
+function throttling1(fn, delay){
+  let timer = null;
+  let _this = this;
+  return function(){
+    if(timer) return;
+    timer = setTimeout(()=>{
+      fn.apply(_this, arguments)
+    }, delay)
+  }
+}

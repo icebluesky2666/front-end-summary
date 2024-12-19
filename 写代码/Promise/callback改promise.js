@@ -13,7 +13,9 @@ function promisify(fn){
     return new Promise((resolve, reject)=>{
       try {
         console.log('==',args)
-        fn(args, resolve)
+        fn(args, (a, b)=>{
+          resolve(b)
+        })
       } catch (error) {
         reject(error)
       }
