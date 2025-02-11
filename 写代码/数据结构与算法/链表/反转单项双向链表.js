@@ -302,3 +302,5 @@ function copyNodesInMap2(head){
   return res;
 }
 copyNodesInMap2(a1);
+
+// 反转双链表

@@ -7,7 +7,7 @@ function useMyReducer(reducer, initdata){
   return [
     dataRef.rurrent,
     useMyReducer.dispach
-  ]
+  ] 
 }
 useMyReducer.prototype.dispach = (action)=>{
   return this.reducer(this.state, action)

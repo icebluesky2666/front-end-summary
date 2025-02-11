@@ -122,3 +122,4 @@ b.left = c;
 c.left = d;
 console.log(getCommonParents(a,c,d)?.targetNode)
 console.log(lowestCommonAncestor(a,c,d))
+
